@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import SigninForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
 import LayoutForm from "./_auth/LayoutForm";
-import AllUsers from "./pages/allUsers";
 import AllTasks from "./pages/AllTasks";
+import HomePage from "./pages/Home";
 
 const App = () => {
   return (
@@ -11,10 +11,11 @@ const App = () => {
       <Routes>
         <Route element={<LayoutForm />}>
           <Route path="/sign-in" element={<SigninForm />} />
-          <Route path="/all-users" element={<AllUsers/>} />
-          <Route path="/all-tasks" element={<AllTasks/>} />
           <Route path="/sign-up" element={<SignupForm />} /> 
         </Route>
+          <Route path="/all-tasks" element={<AllTasks/>} />
+          <Route path="/home" element={<HomePage />} /> 
+
       </Routes>
     </main>
   );
