@@ -15,3 +15,10 @@ export const SigninVaidation = z.object({
 export const searchTask = z.object({
   id: z.string().min(1, {message: "Campo não pode ficar vazio"}).max(50),
 });
+
+export const CreateTask = z.object({
+  name: z.string().min(2, {message: "Preencha"}).max(50),
+  description: z.string(),
+  date: z.string().min(1, {message: "Ponha a data"}).max(50),
+  isPriority: z.boolean(),
+});

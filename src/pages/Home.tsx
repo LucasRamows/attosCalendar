@@ -1,4 +1,4 @@
-import TaskEditor from "@/components/shared/TaskEditor";
+import { PopoverDemo } from "@/components/shared/popup";
 import api from "@/services/api";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
@@ -8,7 +8,7 @@ interface Task {
   name: string;
   description?: string;
   date?: string;
-  isPriority?: boolean;
+  isPrioriry?: boolean;
   status: boolean;
 }
 
@@ -57,7 +57,7 @@ const HomePage = () => {
           {
             description: taskDesc,
             status: false,
-            isPriority: singleTask.isPriority,
+            isPriority: singleTask.isPrioriry,
           },
           { headers: { Authorization: "Bearer " + token } }
         );
@@ -95,44 +95,49 @@ const HomePage = () => {
   return (
     <div className="flex h-screen w-screen p-4 gap-2">
       <div className="w-1/2 flex flex-col items-start gap-2">
+        <PopoverDemo></PopoverDemo>
         <ul className="bg-red-400 rounded-2xl flex flex-col p-4 w-full">
-          {taskData.filter(task => task.isPrioriry).map((task) => (
-            <li
-              className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-200/30 p-2"
-              key={task.id}
-              onClick={() => onTaskClick(task.id)}
-            >
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  onChange={() => onCheckClick(task.id)}
-                  className="w-4 h-4 accent-green-500"
-                />
-              </div>
-              <p>{task.name}</p>
-              <p>{task.date}</p>
-            </li>
-          ))}
+          {taskData
+            .filter((task) => task.isPrioriry)
+            .map((task) => (
+              <li
+                className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-200/30 p-2"
+                key={task.id}
+                onClick={() => onTaskClick(task.id)}
+              >
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    onChange={() => onCheckClick(task.id)}
+                    className="w-4 h-4 accent-green-500"
+                  />
+                </div>
+                <p>{task.name}</p>
+                <p>{task.date}</p>
+              </li>
+            ))}
         </ul>
 
         <ul className="bg-yellow-200 rounded-2xl flex flex-col p-4 w-full">
-          {taskData.filter(task => !task.isPrioriry).map((task) => (
-                <li
-              className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-400/30 p-2"
-              key={task.id}
-              onClick={() => onTaskClick(task.id)}
-            >
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  onChange={() => onCheckClick(task.id)}
-                  className="w-4 h-4 accent-green-500"
-                />
-              </div>
-              <p>{task.name}</p>
-              <p>{task.date}</p>
-            </li>
-          ))}
+          {taskData
+            .filter((task) => !task.isPrioriry)
+            .map((task) => (
+              <li
+                className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-400/30 p-2"
+                key={task.id}
+                onClick={() => onTaskClick(task.id)}
+              >
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    onChange={() => onCheckClick(task.id)}
+                    className="w-4 h-4 accent-green-500"
+                  />
+                </div>
+                <p>{task.name}</p>
+                <p>{task.date}</p>
+              </li>
+            ))}
         </ul>
       </div>
 
