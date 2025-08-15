@@ -53,7 +53,7 @@ export function PopAccount() {
             <PopoverContent className="w-60">
                 <div className="grid gap-4">
                     <div className="space-y-2 flex justify-between">
-                        <h4 className="leading-none font-medium">Olá {user.name}</h4>
+                        <h4 className="leading-none font-medium">Olá, {user.name}</h4>
                         <p className="text-[10px]">{user.role}</p>
                     </div>
                     <div className="grid gap-2">

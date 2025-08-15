@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import SigninForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
 import LayoutForm from "./_auth/LayoutForm";
-import LayoutHome from "./pages/home/LauoytHome";
+import LayoutHome from "./pages/home/LayoutHome";
 import HomePage from "./pages/home/HomePage";
 
 const App = () => {

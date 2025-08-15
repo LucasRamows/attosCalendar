@@ -10,6 +10,7 @@ interface Task {
   date?: string;
   isPriority?: boolean;
   status: boolean;
+  remaining?: string;
 }
 
 const HomePage = () => {

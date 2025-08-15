@@ -14,7 +14,7 @@ import ErrorPopUp from "./ErrorPopUp";
 import type { Task } from "@/pages/home/HomePage";
 
 interface PopoverDemoProps {
-  onTaskCreated?: (task: Task) => void; // recebe a função do pai
+  onTaskCreated?: (task: Task) => void;
 }
 
 export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
@@ -25,6 +25,7 @@ export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
   const [success, setSuccess] = useState(false);
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
+  const [remaining, setRemaining] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,11 +49,11 @@ export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
     try {
       console.log("Submitting task:", { name, date, desc, isChecked });
       const response = await api.post("/create-task", {
-
         name: name,
         date: date,
         description: desc,
         isPriority: isChecked,
+        remaining: remaining,
 
       },
         { headers: { Authorization: "Bearer " + token } }
@@ -119,6 +120,16 @@ export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
                 placeholder="..."
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
+                className="col-span-2 h-8"
+              />
+            </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+              <Label htmlFor="height">Lembrete</Label>
+              <Input
+                id="remaining"
+                placeholder="1d"
+                value={remaining}
+                onChange={(e) => setRemaining(e.target.value)}
                 className="col-span-2 h-8"
               />
             </div>

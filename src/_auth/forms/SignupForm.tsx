@@ -42,7 +42,7 @@ const SignupForm = () => {
         key: values.password,
         email: values.email,
       });
-      navigate("/all-users");
+      navigate("/home");
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -139,7 +139,7 @@ const SignupForm = () => {
                   <Loader />
                 </div>
               ) : (
-                "Entrar"
+                "Criar Conta"
               )}
             </Button>
             <p className="text-small-regular text-light-2 text-center">
