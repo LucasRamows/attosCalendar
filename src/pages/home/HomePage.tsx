@@ -1,4 +1,4 @@
-import { PopoverDemo } from "@/components/shared/popup";
+import { PopoverDemo } from "@/components/shared/PopOverDemo";
 import api from "@/services/api";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
@@ -8,7 +8,7 @@ interface Task {
   name: string;
   description?: string;
   date?: string;
-  isPrioriry?: boolean;
+  isPriority?: boolean;
   status: boolean;
 }
 
@@ -17,6 +17,9 @@ const HomePage = () => {
   const [singleTask, setSingleTask] = useState<Task | undefined>(undefined);
   const [taskDesc, setTaskDesc] = useState<string>("");
   const token = localStorage.getItem("token");
+  const addTask = (newTask: Task) => {
+    setTaskData((prev) => [...prev, newTask]);
+  };
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -57,7 +60,7 @@ const HomePage = () => {
           {
             description: taskDesc,
             status: false,
-            isPriority: singleTask.isPrioriry,
+            isPriority: singleTask.isPriority,
           },
           { headers: { Authorization: "Bearer " + token } }
         );
@@ -93,12 +96,12 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen p-4 gap-2">
+    <div className="flex h-screen w-full gap-2">
       <div className="w-1/2 flex flex-col items-start gap-2">
-        <PopoverDemo></PopoverDemo>
+        <PopoverDemo onTaskCreated={addTask}></PopoverDemo>
         <ul className="bg-red-400 rounded-2xl flex flex-col p-4 w-full">
           {taskData
-            .filter((task) => task.isPrioriry)
+            .filter((task) => task.isPriority)
             .map((task) => (
               <li
                 className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-200/30 p-2"
@@ -120,7 +123,7 @@ const HomePage = () => {
 
         <ul className="bg-yellow-200 rounded-2xl flex flex-col p-4 w-full">
           {taskData
-            .filter((task) => !task.isPrioriry)
+            .filter((task) => !task.isPriority)
             .map((task) => (
               <li
                 className="w-full flex justify-between items-center cursor-pointer rounded-lg transition-colors duration-200 hover:bg-gray-400/30 p-2"
@@ -158,3 +161,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+export type { Task };

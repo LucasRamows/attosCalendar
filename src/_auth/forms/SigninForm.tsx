@@ -36,11 +36,12 @@ const SigninForm = () => {
   async function onSubmit(values: z.infer<typeof SigninVaidation>) {
     setIsLoading(true);
     try {
-      const { data: token } = await api.post("/login-user", {
+      const { data } = await api.post("/login-user", {
         access: parseInt(values.access),
         key: values.password,
       });
-      localStorage.setItem("token", token.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       setIsLoading(false);
       navigate("/home");
     } catch (error) {
