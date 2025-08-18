@@ -30,6 +30,8 @@ const SignupForm = () => {
       username: "",
       password: "",
       email: "",
+      phone: "",
+      access: "",
     },
   });
 
@@ -41,6 +43,7 @@ const SignupForm = () => {
         access: parseInt(values.access),
         key: values.password,
         email: values.email,
+        phone: values.phone,
       });
       navigate("/home");
       setIsLoading(false);
@@ -114,6 +117,19 @@ const SignupForm = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input type="email" className="shad-input" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Telefone</FormLabel>
+                  <FormControl>
+                    <Input type="text" className="shad-input" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

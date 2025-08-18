@@ -65,12 +65,14 @@ export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
         setSuccess(false);
       }, 5000);
       setName("");
+      setRemaining("");
       setDate("");
       setDesc("");
       setIsChecked(false);
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
       setName("");
+      setRemaining("");
       setDate("");
       setDesc("");
       setIsChecked(false);
@@ -127,7 +129,7 @@ export function PopoverDemo({ onTaskCreated }: PopoverDemoProps) {
               <Label htmlFor="height">Lembrete</Label>
               <Input
                 id="remaining"
-                placeholder="1d"
+                placeholder="vezes/dia"
                 value={remaining}
                 onChange={(e) => setRemaining(e.target.value)}
                 className="col-span-2 h-8"
