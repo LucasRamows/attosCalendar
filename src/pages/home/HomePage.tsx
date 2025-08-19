@@ -2,6 +2,7 @@ import { PopoverDemo } from "@/components/shared/PopOverDemo";
 import api from "@/services/api";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Task {
   id: number;
@@ -12,8 +13,8 @@ interface Task {
   status: boolean;
   remaining?: string;
 }
-
 const HomePage = () => {
+  const Navigate = useNavigate();
   const [taskData, setTaskData] = useState<Task[]>([]);
   const [singleTask, setSingleTask] = useState<Task | undefined>(undefined);
   const [taskDesc, setTaskDesc] = useState<string>("");
@@ -30,8 +31,11 @@ const HomePage = () => {
           params: { token },
         });
         setTaskData(res.data);
-      } catch (err) {
+      } catch (err: any) {
         console.error("Erro ao buscar tasks:", err);
+        if (err.response.data.message === "Token inválido") {
+          Navigate("/sign-in", { replace: true });
+        }
       }
     };
     fetchTasks();
